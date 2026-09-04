@@ -1,0 +1,207 @@
+---
+title: Clash for Linux Download & Installation Guide
+description: One-click install script for Clash/Mihomo on Linux, based on nelvko/clash-for-linux-install. Supports Ubuntu, Debian, CentOS, Arch and more. Features subscription management, Web dashboard, Tun mode and CLI tools.
+outline: deep
+head:
+  - - meta
+    - name: keywords
+      content: Clash for Linux,Linux Clash install,Mihomo Linux,clash-for-linux-install,Ubuntu Clash,Debian Clash,Linux proxy,one-click script
+---
+
+# Clash for Linux One-Click Install Guide
+
+A **CLI management script** for Linux servers and desktops. Deploy Mihomo / Clash on common distros with a single command, complete with subscription management, Web dashboard, Tun mode and more.
+
+[Official Repository↗](https://github.com/nelvko/clash-for-linux-install)
+
+<Badge type="tip" text="Ubuntu" />
+<Badge type="tip" text="Debian" />
+<Badge type="tip" text="CentOS" />
+<Badge type="tip" text="Arch" />
+<Badge type="tip" text="Rocky" />
+
+## Download & Install
+
+Unlike GUI clients, this project installs via script — no manual binary downloads needed.
+
+### System Requirements
+
+| Item | Requirement |
+| :--- | :--- |
+| **Shell** | `bash` or `zsh` |
+| **Commands** | `curl` `tar` `unzip` `xz` `pgrep` |
+| **Architecture** | amd64 / arm64 / armv7 (auto-detected) |
+
+Install missing dependencies via your package manager:
+
+```bash
+# Debian / Ubuntu
+sudo apt update && sudo apt install -y curl tar unzip xz-utils procps
+
+# CentOS / Rocky
+sudo yum install -y curl tar unzip xz procps-ng
+
+# Arch
+sudo pacman -S curl tar unzip xz
+```
+
+### One-Click Install Command
+
+```bash
+git clone --branch master --depth 1 https://gh-proxy.org/https://github.com/nelvko/clash-for-linux-install.git \
+  && cd clash-for-linux-install \
+  && bash install.sh
+```
+
+The script will automatically: detect architecture → download kernel → configure service → register CLI commands.
+
+::: tip Tip
+You can also specify a kernel type or pass a subscription URL directly:
+```bash
+bash install.sh mihomo          # Use mihomo kernel
+bash install.sh clash           # Use clash kernel
+bash install.sh "SUB_URL"       # Install and import subscription
+```
+:::
+
+## Installation Steps
+
+### 1. Install the Application
+
+Run the one-click install command above and wait for the script to finish. After installation, **reopen your terminal** or run `source ~/.bashrc` to activate the management commands.
+
+### 2. Get a Subscription
+
+::: tip ⚠️ Important:
+Please note that `clash-for-linux-install` is a proxy tool installer, not a proxy service provider. Installing it alone does not enable internet access. You need a [`subscription (service provider)`](/en/guide#what-are-how-choose-service-services) to get started. If you are unsure how to choose a provider, read [How to Choose the Right Provider↗](/en/how-choose-service).
+:::
+
+If you don't have a subscription yet, [Learn how to choose a provider↗](/en/how-choose-service)
+
+- Log in to the provider's official website
+- Go to the dashboard
+- Click to copy the subscription URL
+
+### 3. Import Subscription
+
+```bash
+clashsub add "YOUR_SUBSCRIPTION_URL"
+```
+
+::: warning Note
+Always wrap the URL in double quotes if it contains special characters. Local files are also supported: `clashsub add "file:///path/to/config.yaml"`
+:::
+
+View and switch subscriptions:
+
+```bash
+clashsub ls         # List all subscriptions
+clashsub use 1      # Activate subscription #1
+clashsub update     # Update current subscription
+```
+
+### 4. Start Proxy
+
+```bash
+clashon              # Start kernel + set system proxy
+```
+
+Verify it works:
+
+```bash
+curl -I https://www.google.com
+```
+
+Stop proxy:
+
+```bash
+clashoff             # Stop kernel + unset system proxy
+```
+
+To control proxy environment variables only (without stopping the kernel):
+
+```bash
+clashproxy on        # Set proxy env vars only
+clashproxy off       # Unset proxy env vars only
+```
+
+## Advanced Guide
+
+### Open Web Dashboard
+
+```bash
+clashui              # Print dashboard URL
+clashsecret          # View access secret
+clashsecret newkey   # Change secret (auto-restarts)
+```
+
+Default frontend is [zashboard](https://github.com/Zephyruso/zashboard). If exposing to the public internet, prefer SSH port forwarding over direct access.
+
+### Enable TUN Mode
+
+::: tip ⚠️ Note:
+TUN mode creates a virtual network card to take over all device traffic. Learn more in [Proxy Modes Explained](/en/proxy-modes).
+:::
+
+```bash
+clashtun on          # Enable Tun
+clashtun off         # Disable Tun
+clashtun             # Check current status
+```
+
+Tun mode captures all system traffic (including Docker containers), ideal for transparent proxy scenarios. May not work on stripped-down kernels or minimal container environments.
+
+### Mixin Custom Configuration
+
+Mixin is deeply merged with the original subscription at higher priority — great for custom rules, DNS, and proxy groups:
+
+```bash
+clashmixin           # View Mixin config
+clashmixin -e        # Edit Mixin config
+clashmixin -c        # View original subscription config
+clashmixin -r        # View final runtime config
+```
+
+### Upgrade Kernel
+
+```bash
+clashupgrade         # Upgrade to latest
+clashupgrade -r      # Upgrade to stable release
+clashupgrade -a      # Upgrade to alpha/test release
+```
+
+### Uninstall
+
+```bash
+cd clash-for-linux-install && bash uninstall.sh
+```
+
+Uninstall will automatically stop the service, remove CLI commands, delete the install directory, and clean up cron jobs. Disable Tun manually before uninstalling.
+
+## Common Issues
+
+### [What to do if subscription fetch fails?](/en/troubleshooting)
+
+Common causes:
+- URL not wrapped in double quotes
+- Subscription expired or incompatible format
+
+Try `clashsub update --convert` to re-fetch using the local converter.
+
+### [Proxy enabled but still can't access the internet?](/en/troubleshooting)
+
+Troubleshooting steps:
+1. `clashctl status` — confirm the kernel is running
+2. `clashlog` — check for errors in the log
+3. `echo $http_proxy` — verify proxy env vars are set
+4. Check whether the subscription contains usable nodes
+
+### Why is the port different from other tutorials?
+
+The script auto-detects port conflicts and assigns a random available port, so it may not be `7890` or `9090`. Run `clashctl status` to see the actual port.
+
+### Can't open the Web dashboard?
+
+1. Confirm `clashctl status` shows the service is running
+2. Check whether the firewall allows the dashboard port
+3. If on a remote server, make sure you're using the correct IP

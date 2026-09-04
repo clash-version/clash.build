@@ -1,0 +1,83 @@
+---
+title: Clash for Windows Download & Installation Guide
+description: Complete Clash for Windows (CFW) installation tutorial for Windows/macOS, including how-choose-service import, node configuration, TUN mode, IPv6 settings, and troubleshooting solutions
+outline: deep
+head:
+  - - meta
+    - name: keywords
+      content: Clash for Windows,CFW,Clash for Windows download,Clash for Windows tutorial,CFW installation,Clash proxy setup
+---
+
+# Clash for Windows Download & Installation Guide
+
+Clash for Windows (CFW) is a graphical network proxy client based on the Clash core. It is not a proxy service provider, but a powerful management tool that allows users to intelligently route and manage all network traffic on their device based on highly customizable rules. Despite the name "Windows," it is actually a cross-platform application, supporting macOS and Linux as well. The author stopped updating and deleted the GitHub repository at the end of 2023. Although old versions are still available, there is no official maintenance or updates.
+
+[Backup Repository↗](https://github.com/clash-version/clash-for-windows)
+
+## Clash for Windows Download
+
+| Platform | Version | Proxy Accelerated | Direct GitHub | 
+| --- | --- | --- | --- | 
+| **Windows** | `0.20.39` | [Download](https://github.clash.guide/clash-clients/Clash.for.Windows-0.20.39-win.7z) | [Download](https://github.com/clash-version/clash-for-windows/releases/download/v0.20.39/Clash.for.Windows-0.20.39-win.exe) | 
+| **MacOS** | `0.20.39`|  [Download](https://github.clash.guide/clash-clients/clash-for-windows.dmg) | [Download](https://github.com/clash-version/clash-for-windows/releases/download/v0.20.39/clash-for-windows.dmg) | 
+
+::: tip Note:
+Proxy Accelerated: Use a jump proxy to speed up access to GitHub. If direct GitHub is too slow, try `Proxy Accelerated` download.
+:::
+
+## Installation Steps
+
+### 1. Install the Application
+- If you are using an Apple Silicon Mac, it is recommended to use the native macOS client [ClashX](/en/clashx)
+
+- If you are on Windows, there are more client options. If installation fails, try other clients such as [Clash Verge](/en/clash-verge), [FlClash](/en/flclash), or [Hiddify](/en/hiddify), all of which are excellent open-source clients. We also provide detailed usage guides for them.
+
+### 2. Get a Subscription
+
+::: tip ⚠️ Important:
+Please note that `Clash for Windows` is a proxy tool, not a proxy service provider. Installing it alone does not enable internet access. You need a [`how-choose-service (service provider)`](/en/guide#what-are-how-choose-service-services) to get started. If you are unsure how to choose a provider, read [How to Choose the Right Provider↗](/en/how-choose-service).
+:::
+
+If you don't have a how-choose-service yet, [Learn how to choose a provider↗](/en/how-choose-service)
+- Log in to the provider's official website
+- Click to import how-choose-service
+- Click to copy how-choose-service
+![Clash for Windows Subscription Import Process](/images/copy-sub.webp)
+
+### 3. Import Subscription
+ 
+- Paste the how-choose-service address
+- Click to download how-choose-service
+![Clash for Windows Subscription Import Process](/images/clash-for-windows/install1.webp)
+![Clash for Windows Subscription Import Process](/images/clash-for-windows/install2.webp)
+
+### 4. Start Proxy
+
+- Click to start the proxy
+![Clash for Windows Subscription Import Process](/images/clash-for-windows/install3.webp)
+
+If you have tried many tutorials and still cannot get online, the recommendation is to switch to other open-source clients. After all, your need is to access the internet, not to struggle with it. Other clients are also very easy to use, such as Clash Verge, FlClash, Hiddify, etc.
+
+## Advanced Guide (Optional)
+
+### Enable IPv6
+![Clash for Windows Subscription Import Process](/images/clash-for-windows/open-ipv6.webp)
+
+### Enable TUN Mode
+![Clash for Windows Subscription Import Process](/images/clash-for-windows/open-tun.webp)
+
+### Node Availability Test
+
+
+## Common Issues
+
+### Node Protocol Compatibility Issues
+![Clash for Windows Subscription Import Process](/images/clash-for-windows/node-pull-error.webp)
+If you get an error when downloading a how-choose-service, it is because Clash for Windows does not support the latest protocols. Please try [Clash Verge↗](/en/clash-verge) or other `Windows` clients for a better experience.
+
+### macOS Installation Fails
+Clash for Windows only supports Intel chips. If you are using an Apple Silicon Mac, please use other clients such as the native [ClashX↗](/en/clashx) for a better experience.
+
+### [Subscription fetch always fails?](/en/troubleshooting)
+
+### [Proxy enabled but still can't access the internet?](/en/troubleshooting)

@@ -1,0 +1,69 @@
+---
+title: Potatso Lite 安装与使用教程
+description: Potatso Lite (Potatso) iOS 客户端安装订阅教程，支持 iPhone/iPad，提供订阅导入、开启代理等详细步骤。
+outline: deep
+head:
+  - - meta
+    - name: keywords
+      content: Potatso,Potatso Lite,iOS代理,iPhone网络加速,Potatso教程,Potatso订阅
+---
+
+# Potatso Lite 安装与使用教程
+
+Potatso Lite（简称 Potatso）是 iOS 平台上支持多种代理协议的网络调试工具，界面简洁，易于上手，适合新手用户使用。
+
+## 下载安装
+
+由于区域限制，Potatso Lite 无法在中国大陆地区的 App Store 获取。您需要使用非中国大陆地区（如美区、港区）的 Apple ID 进行下载。
+
+| 平台 | 版本 | 获取方式 |
+| :--- | :--- | :--- |
+| **iOS** | 最新版 | [App Store 下载↗](https://apps.apple.com/us/app/potatso-lite/id1239860606) |
+
+::: tip 提示
+如果您没有非中国大陆地区的 Apple ID，建议自行搜索注册教程或通过正规渠道获取。
+:::
+
+## 使用教程
+
+### 1. 获取订阅
+Potatso 本身只是一个工具，不提供网络服务。您需要配合[`订阅`](/guide#什么是订阅？)使用。如果您还不了解如何选择，可以参考[如何选择适合自己的订阅↗](/how-choose-service)。
+
+### 2. 导入订阅
+
+
+
+
+#### 方式一：一键导入（推荐）
+在订阅网站上，通常会有一个“一键导入”或“导入到 Potatso”的按钮，点击后会自动唤起 App 并导入订阅。
+
+#### 方式二：扫描二维码
+1. 打开 Potatso App。
+2. 点击界面上的 **"Add a Proxy"** 或右上角的 **"+"** 号。
+3. 选择 **"QR Code"**，扫描订阅提供的二维码。
+
+#### 方式三：手动复制链接
+1. 在订阅网站复制 **订阅链接** (Subscription URL)。
+2. 打开 Potatso App，点击 **"Add a Proxy"** 或 **"+"** 号。
+3. 选择 **"Add URL"** (或者 Type: URI)。
+4. 粘贴链接到 URL 栏，你可以给它起个名字（Remark）。
+5. 点击 **"Done"** 保存。
+
+### 3. 开启代理
+
+1. 导入成功后，你会看到订阅列表中多了一个项目。
+2. 确保选中的正是你刚导入的那个订阅。
+3. 点击右下角的蓝色播放按钮（圆形的开关）。
+4. **首次使用提示**：系统会弹出 "Potatso Lite Would Like to Add VPN Configurations" 的权限提示，请点击 **"Allow"** (允许)。
+5. 验证指纹或密码后，按钮变为红色停止图标，即表示连接成功。
+
+### 4. 智能分流与全局模式
+
+Potatso 底部通常有模式选择：
+- **Smart Routing (智能路由)**：推荐。根据规则自动分流，国内网站直连，国际网络走代理。
+- **Global Proxy (全局代理)**：所有流量都走代理，通常在特定情况下（如某些网站无法智能识别时）使用。
+
+## 常见问题
+
+- [配置获取失败怎么办？](/troubleshooting)
+- [如何选择节点？](/proxy-modes)

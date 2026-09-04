@@ -1,0 +1,144 @@
+---
+title: Install Clash on HarmonyOS Using ZhuoYiTong Guide
+description: Complete guide to install Clash for Android on HarmonyOS using ZhuoYiTong, no signing certificate required, easily enable proxy on HarmonyOS, supports Clash Meta for Android and more
+outline: deep
+head:
+  - - meta
+    - name: keywords
+      content: ZhuoYiTong,HarmonyOS Clash,ZhuoYiTong Clash,HarmonyOS proxy,ZhuoYiTong guide,install Android apps on HarmonyOS
+---
+
+# Install Clash on HarmonyOS Using ZhuoYiTong Guide
+
+For HarmonyOS users who want to use Clash for proxy, besides using the native HarmonyOS app [Clash Box](/en/clash-box), you can also install Android version of Clash clients through ZhuoYiTong. This guide will explain in detail how to install and use Clash on HarmonyOS using ZhuoYiTong.
+
+## What is ZhuoYiTong?
+
+ZhuoYiTong is an Android app compatibility layer tool designed specifically for HarmonyOS, allowing users to install and run Android applications on HarmonyOS. Through ZhuoYiTong, HarmonyOS users can easily install various Android versions of Clash clients without the complex signing certificate process.
+
+::: tip Why Choose ZhuoYiTong?
+- **No Signing Certificate Required**: Unlike installing .hap files which require self-signing certificates, ZhuoYiTong installation is much simpler
+- **Good Compatibility**: Supports most Android applications, including the Clash series of clients
+- **Easy Operation**: Install APK files just like on an Android phone
+:::
+
+## Preparation
+
+### 1. Download ZhuoYiTong
+
+First, you need to install the ZhuoYiTong app on your HarmonyOS device:
+
+| Platform | How to Get |
+| --- | --- |
+| **HarmonyOS** | Search for "ZhuoYiTong" in Huawei AppGallery and download |
+
+::: warning Notes
+- Please make sure to download the official version of ZhuoYiTong from Huawei AppGallery
+- First launch of ZhuoYiTong requires initialization setup, please be patient
+- Some device models may require enabling certain permissions
+:::
+
+### 2. Download Clash Client
+
+Choose a suitable Android Clash client to download:
+
+| Client | Version | Proxy Accelerated | Direct GitHub |
+| --- | --- | --- | --- |
+| **Clash Meta for Android** (Recommended) | `2.11.17` | [Download](https://github.clash.guide/clash-clients/cmfa-2.11.17-meta-universal-release.apk) | [Download](https://github.com/MetaCubeX/ClashMetaForAndroid/releases/download/v2.11.17/cmfa-2.11.17-meta-universal-release.apk) |
+| **FlClash** | `0.8.90` | [Download](https://github.clash.guide/clash-clients/FlClash-0.8.90-android-x86_64.apk) | [Download](https://github.com/chen08209/FlClash/releases/download/v0.8.90/FlClash-0.8.90-android-x86_64.apk) |
+| **Clash for Android** | `2.5.12` | [Download](https://github.clash.guide/clash-clients/cfa-2.5.12-premium-universal-release.apk) | [Download](https://github.com/clash-version/clash-for-android/releases/download/v2.5.12/cfa-2.5.12-premium-universal-release.apk) |
+
+::: tip Client Recommendations
+- **Clash Meta for Android**: Active community, feature-rich, highly recommended
+- **FlClash**: Developed with Flutter, beautiful interface
+- **Clash for Android**: Classic original version, no longer updated
+:::
+
+## Installation Steps
+
+### 1. Install ZhuoYiTong
+
+1. Open Huawei AppGallery
+2. Search for "ZhuoYiTong"
+3. Click install and wait for download to complete
+4. First time opening ZhuoYiTong, follow the prompts to complete initialization setup
+
+### 2. Install Clash via ZhuoYiTong
+
+1. Save the downloaded Clash APK file to your phone's local storage
+2. Open the ZhuoYiTong app
+3. Click "File Install" or "Local Install" button
+4. Find and select the APK file you just downloaded
+5. Click "Install" and wait for installation to complete
+6. After successful installation, you can launch the Clash app within ZhuoYiTong
+
+::: warning Installation Tips
+- If installation fails, check if the APK file is complete
+- Some versions may have compatibility issues, try Clash Meta for Android first
+- Keep ZhuoYiTong in the foreground during installation
+:::
+
+### 3. Get a Subscription
+
+::: tip ⚠️ Important:
+Please note that Clash is a proxy tool, not a proxy service provider. Installing it alone does not enable internet access. You need a [`how-choose-service (service provider)`](/en/guide#what-are-how-choose-service-services) to get started. If you are unsure how to choose a provider, read [How to Choose the Right Provider↗](/en/how-choose-service).
+:::
+
+If you don't have a how-choose-service yet, [Learn how to choose a provider↗](/en/how-choose-service)
+
+- Log in to the provider's official website
+- Click to import how-choose-service
+- Click to copy how-choose-service
+![ZhuoYiTong Install Clash Subscription Process](/images/copy-sub.webp)
+
+### 4. Import Subscription
+
+1. Open the installed Clash app within ZhuoYiTong
+2. Go to "Profiles" or "Configuration" page
+3. Click "New Profile" or the "+" icon
+4. Select "Import from URL"
+5. Paste the copied how-choose-service address
+6. Click save or download
+
+### 5. Start Proxy
+
+1. Return to the Clash main interface
+2. Select the profile you just imported
+3. Click "Start" or toggle the switch to enable proxy
+4. First-time use will prompt for VPN permission, click allow
+5. Status showing "Running" indicates successful connection
+
+## Common Issues
+
+### What to do if ZhuoYiTong fails to install APK?
+
+1. **Check file integrity**: Re-download the APK file
+2. **Storage space**: Ensure device has enough storage space
+3. **ZhuoYiTong version**: Try updating ZhuoYiTong to the latest version
+4. **Compatibility issues**: Try other versions of Clash clients
+
+### Clash in ZhuoYiTong cannot connect to internet?
+
+1. Ensure ZhuoYiTong itself has network permissions
+2. Check ZhuoYiTong's permission settings in system settings
+3. Try restarting both ZhuoYiTong and Clash apps
+
+### Why recommend ZhuoYiTong over Clash Box?
+
+| Comparison | ZhuoYiTong + Clash | Clash Box |
+| --- | --- | --- |
+| Installation Difficulty | ⭐ Easy | ⭐⭐⭐ Requires self-signing certificate |
+| Open Source | ✅ Clash clients are open source | ❌ Not fully open source |
+| Client Options | Multiple choices | Only Clash Box |
+| Updates & Maintenance | Active community | Single maintainer |
+
+### [What to do if Clash how-choose-service fetch always fails?](/en/troubleshooting)
+
+### [Proxy enabled but still can't access the internet?](/en/troubleshooting)
+
+## Related Guides
+
+- [Clash Box Native HarmonyOS Client Guide](/en/clash-box)
+- [Clash Meta for Android Installation Guide](/en/clash-meta-for-android)
+- [FlClash Multi-Platform Client Guide](/en/flclash)
+- [How to Choose the Right Provider](/en/how-choose-service)

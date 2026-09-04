@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "yarn generate",
+  "outputDirectory": ".output/public",
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/en",
+      "permanent": false
+    }
+  ]
+}

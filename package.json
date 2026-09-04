@@ -1,0 +1,21 @@
+{
+  "name": "Clash.Build",
+  "scripts": {
+    "predev": "node scripts/prepare-docus-locales.mjs",
+    "dev": "nuxt dev",
+    "prebuild": "node scripts/prepare-docus-locales.mjs",
+    "build": "nuxt build",
+    "pregenerate": "node scripts/prepare-docus-locales.mjs",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@nuxtjs/i18n": "^10.6.0",
+    "docus": "latest",
+    "better-sqlite3": "^12.11.1",
+    "nuxt": "^4.4.8"
+  }
+}

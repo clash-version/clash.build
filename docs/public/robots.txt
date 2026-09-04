@@ -1,0 +1,6 @@
+# robots.txt for clash.guide
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://clash.guide/sitemap.xml

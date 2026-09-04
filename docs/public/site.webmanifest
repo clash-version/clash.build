@@ -1,0 +1,21 @@
+{
+  "name": "Clash下载与教程",
+  "short_name": "Clash.Guide",
+  "description": "提供Windows、安卓、苹果、鸿蒙、Linux等操作系统的Clash版本下载与使用教程",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3eaf7c",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
