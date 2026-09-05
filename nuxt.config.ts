@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   extends: ['docus'],
-  modules: ['@nuxtjs/i18n'],
+  modules: ['@nuxtjs/i18n', '@vercel/analytics'],
   site: {
     url: 'https://clash.build',
     name: 'Clash.Build',

@@ -27,4 +27,7 @@ export default defineAppConfig({
   github: {
     url: 'https://github.com/clash-version/clash-download',
   },
+  search: {
+    fts: true,
+  },
 })

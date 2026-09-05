@@ -14,8 +14,9 @@
   },
   "dependencies": {
     "@nuxtjs/i18n": "^10.6.0",
-    "docus": "latest",
+    "@vercel/analytics": "^2.0.1",
     "better-sqlite3": "^12.11.1",
+    "docus": "latest",
     "nuxt": "^4.4.8"
   }
 }
