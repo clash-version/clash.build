@@ -7,7 +7,7 @@ This is the default Docus starter template that provides everything you need to 
 > [!TIP]
 > If you're looking for i18n support, check out the [i18n starter](https://github.com/nuxt-themes/docus/tree/main/.starters/i18n).
 
-## ✨ Features
+## ✨ Features 
 
 - 🎨 **Beautiful Design** - Clean, modern documentation theme
 - 📱 **Responsive** - Mobile-first responsive design  
