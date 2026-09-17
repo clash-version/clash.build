@@ -16,11 +16,16 @@ export default defineNuxtConfig({
   },
   i18n: {
     defaultLocale: 'en',
-    detectBrowserLanguage: false,
-    rootRedirect: 'en',
+    strategy: 'prefix',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+      fallbackLocale: 'en',
+    },
     locales: [
-      { code: 'en', name: 'English' },
-      { code: 'zh-CN', name: '简体中文' },
+      { code: 'en', language: 'en-US', name: 'English' },
+      { code: 'zh-CN', language: 'zh-CN', name: '简体中文' },
     ],
   },
   icon: {

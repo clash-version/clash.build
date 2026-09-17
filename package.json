@@ -1,8 +1,10 @@
 {
   "name": "Clash.Build",
+  "type": "module",
   "scripts": {
     "predev": "node scripts/prepare-docus-locales.mjs",
     "dev": "nuxt dev",
+    "test": "node --test tests/*.test.mjs",
     "prebuild": "node scripts/prepare-docus-locales.mjs",
     "build": "nuxt build",
     "pregenerate": "node scripts/prepare-docus-locales.mjs",

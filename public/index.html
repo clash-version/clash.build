@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, follow">
+    <title>Clash.Build</title>
+    <script type="module">
+      import { getRootRedirectPath } from '/root-locale.js'
+
+      window.location.replace(getRootRedirectPath(document.cookie, navigator.languages))
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=/en"></noscript>
+  </head>
+  <body>
+    <p>Redirecting to your preferred language…</p>
+  </body>
+</html>
