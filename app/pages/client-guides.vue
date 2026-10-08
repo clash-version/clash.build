@@ -211,6 +211,7 @@ function getDescription(guide: ClientGuide) {
     />
 
     <UPageBody>
+      <!-- 安装教程入口暂时隐藏，保留快速开始入口。
       <div class="grid gap-4 md:grid-cols-2">
         <NuxtLink
           v-for="guide in guides"
@@ -245,6 +246,7 @@ function getDescription(guide: ClientGuide) {
           </UCard>
         </NuxtLink>
       </div>
+      -->
 
       <UAlert
         class="mt-8"
@@ -262,6 +264,7 @@ function getDescription(guide: ClientGuide) {
           >
             {{ copy.quickStart }}
           </UButton>
+          <!--
           <UButton
             :to="localePath('/installation-guide/troubleshooting')"
             size="sm"
@@ -270,6 +273,7 @@ function getDescription(guide: ClientGuide) {
           >
             {{ copy.troubleshooting }}
           </UButton>
+          -->
         </template>
       </UAlert>
     </UPageBody>
