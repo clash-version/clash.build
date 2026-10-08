@@ -108,6 +108,10 @@ const patches = [
     replacements: [
       ['`landing_${locale}`', "`landing_${locale.replaceAll('-', '_')}`"],
       ["const siteUrl = inferSiteURL() || ''", "const siteUrl = getSiteConfig(event).url || inferSiteURL() || ''"],
+      [
+        "        const pagePath = page.path || '/'",
+        "        const normalizedPagePath = page.path || '/'\n        const normalizedPagePathLower = normalizedPagePath.toLowerCase()\n        const pagePathLocale = availableLocales.find((locale) => {\n          const localePrefix = `/${locale.toLowerCase()}`\n          return normalizedPagePathLower === localePrefix || normalizedPagePathLower.startsWith(`${localePrefix}/`)\n        })\n        const pagePath = pagePathLocale\n          ? `/${pagePathLocale}${normalizedPagePath.slice(pagePathLocale.length + 1)}`\n          : normalizedPagePath",
+      ],
     ],
   },
 ]
