@@ -32,7 +32,10 @@ const copy = computed(() => isChinese.value
       githubDownload: 'GitHub 下载',
       localDownload: '本地下载',
       nextSteps: '下载完成后',
+      allGuides: '安装指南',
       quickStart: '快速开始',
+      importConfiguration: '导入配置',
+      troubleshooting: '故障排查',
     }
   : {
       detected: 'We detected that you are using',
@@ -50,7 +53,10 @@ const copy = computed(() => isChinese.value
       githubDownload: 'GitHub Download',
       localDownload: 'Local Download',
       nextSteps: 'After downloading',
+      allGuides: 'Browse all client installation guides',
       quickStart: 'Quick Start',
+      importConfiguration: 'Import a Configuration',
+      troubleshooting: 'Troubleshooting',
     })
 
 function getDescription(client: DownloadClient) {
@@ -272,7 +278,18 @@ onMounted(() => {
       <h2 id="download-next-steps" class="mb-4 text-xl font-semibold text-highlighted">
         {{ copy.nextSteps }}
       </h2>
-      <div class="grid gap-3 sm:max-w-xs">
+      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <UButton
+          :to="localePath('/client-guides')"
+          color="neutral"
+          variant="outline"
+          size="lg"
+          leading-icon="i-lucide-book-open-check"
+          trailing-icon="i-lucide-arrow-right"
+          class="justify-between"
+        >
+          {{ copy.allGuides }}
+        </UButton>
         <UButton
           :to="localePath('/installation-guide/quick-start')"
           color="neutral"
@@ -283,6 +300,28 @@ onMounted(() => {
           class="justify-between"
         >
           {{ copy.quickStart }}
+        </UButton>
+        <UButton
+          :to="localePath('/installation-guide/import-configuration')"
+          color="neutral"
+          variant="outline"
+          size="lg"
+          leading-icon="i-lucide-link"
+          trailing-icon="i-lucide-arrow-right"
+          class="justify-between"
+        >
+          {{ copy.importConfiguration }}
+        </UButton>
+        <UButton
+          :to="localePath('/installation-guide/troubleshooting')"
+          color="neutral"
+          variant="outline"
+          size="lg"
+          leading-icon="i-lucide-circle-alert"
+          trailing-icon="i-lucide-arrow-right"
+          class="justify-between"
+        >
+          {{ copy.troubleshooting }}
         </UButton>
       </div>
     </section>

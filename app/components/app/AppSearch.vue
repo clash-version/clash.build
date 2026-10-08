@@ -23,24 +23,17 @@ const { search: searchCollection, status: searchStatus, init } = useFts
   ? useSearchCollection(collectionName, { immediate: false, ignoredTags: ['style'] })
   : { search: undefined, status: ref(undefined), init: () => {} }
 
-function isVisibleSearchResult(item: { id: string }) {
-  const path = item.id.split('#')[0]!.replace(/\/$/, '').toLowerCase()
-  if (/\/client-guides(?:\/|$)/.test(path)) return false
-  return !/\/installation-guide(?:\/|$)/.test(path) || path.endsWith('/installation-guide/quick-start')
-}
-
 function localizeSearchResult<T extends { id: string }>(item: T): T {
   const prefix = `/${locale.value.toLowerCase()}/`
   if (!isEnabled.value || !item.id.toLowerCase().startsWith(prefix)) return item
   return { ...item, id: `/${locale.value}/${item.id.slice(prefix.length)}` }
 }
 
-const visibleFiles = computed(() => files.value?.filter(isVisibleSearchResult).map(localizeSearchResult))
+const localizedFiles = computed(() => files.value?.map(localizeSearchResult))
 const search = searchCollection
   ? async (...[query, options]: Parameters<typeof searchCollection>) => {
-      // Filter before applying the result limit so hidden tutorials cannot crowd out visible pages.
-      const results = await searchCollection(query, { ...options, limit: -1 })
-      return results.filter(isVisibleSearchResult).slice(0, options?.limit ?? 20).map(localizeSearchResult)
+      const results = await searchCollection(query, options)
+      return results.map(localizeSearchResult)
     }
   : undefined
 
@@ -65,7 +58,7 @@ const links = computed(() => useFts
 
 <template>
   <LazyUContentSearch
-    :files="visibleFiles"
+    :files="localizedFiles"
     :search="search"
     :search-status="searchStatus"
     :links="links"
