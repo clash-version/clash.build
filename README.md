@@ -92,7 +92,7 @@ Create a Pages project from this repository and use:
 - Build output directory: `.output/public`
 - Node.js version: `20` or newer
 
-The included `wrangler.jsonc` supports deployment with Wrangler. The root URL uses the visitor's saved language or browser language, with English as the fallback.
+The included `wrangler.jsonc` supports deployment with Wrangler. The root URL displays the English homepage directly. Visitors can switch languages using the language selector.
 
 ## 📄 License
 

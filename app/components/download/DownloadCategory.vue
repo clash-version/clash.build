@@ -31,12 +31,8 @@ const copy = computed(() => isChinese.value
       appStoreDownload: 'App Store 下载',
       githubDownload: 'GitHub 下载',
       localDownload: '本地下载',
-      installationGuide: '安装教程',
       nextSteps: '下载完成后',
-      allGuides: '安装指南',
       quickStart: '快速开始',
-      importConfiguration: '导入配置',
-      troubleshooting: '故障排查',
     }
   : {
       detected: 'We detected that you are using',
@@ -53,12 +49,8 @@ const copy = computed(() => isChinese.value
       appStoreDownload: 'App Store Download',
       githubDownload: 'GitHub Download',
       localDownload: 'Local Download',
-      installationGuide: 'Installation Guide',
       nextSteps: 'After downloading',
-      allGuides: 'Browse all client installation guides',
       quickStart: 'Quick Start',
-      importConfiguration: 'Import a Configuration',
-      troubleshooting: 'Troubleshooting',
     })
 
 function getDescription(client: DownloadClient) {
@@ -172,18 +164,6 @@ onMounted(() => {
             </span>
             <div class="grid gap-2 sm:flex sm:flex-wrap sm:items-center sm:justify-end">
               <UButton
-                v-if="recommendedClient.guideSlug"
-                :to="localePath(`/client-guides/${recommendedClient.guideSlug}`)"
-                size="lg"
-                color="primary"
-                variant="soft"
-                leading-icon="i-lucide-book-open-check"
-                trailing-icon="i-lucide-arrow-right"
-                class="justify-center"
-              >
-                {{ copy.installationGuide }}
-              </UButton>
-              <UButton
                 v-if="recommendedClient.downloadUrl"
                 :to="recommendedClient.downloadUrl"
                 target="_blank"
@@ -261,17 +241,6 @@ onMounted(() => {
               </span>
               <div class="flex flex-wrap items-center justify-end gap-2">
                 <UButton
-                  v-if="client.guideSlug"
-                  :to="localePath(`/client-guides/${client.guideSlug}`)"
-                  color="primary"
-                  variant="soft"
-                  size="sm"
-                  leading-icon="i-lucide-book-open-check"
-                  trailing-icon="i-lucide-arrow-right"
-                >
-                  {{ copy.installationGuide }}
-                </UButton>
-                <UButton
                   v-if="client.downloadUrl"
                   :to="client.downloadUrl"
                   target="_blank"
@@ -303,18 +272,7 @@ onMounted(() => {
       <h2 id="download-next-steps" class="mb-4 text-xl font-semibold text-highlighted">
         {{ copy.nextSteps }}
       </h2>
-      <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <UButton
-          :to="localePath('/client-guides')"
-          color="neutral"
-          variant="outline"
-          size="lg"
-          leading-icon="i-lucide-book-open-check"
-          trailing-icon="i-lucide-arrow-right"
-          class="justify-between"
-        >
-          {{ copy.allGuides }}
-        </UButton>
+      <div class="grid gap-3 sm:max-w-xs">
         <UButton
           :to="localePath('/installation-guide/quick-start')"
           color="neutral"
@@ -325,28 +283,6 @@ onMounted(() => {
           class="justify-between"
         >
           {{ copy.quickStart }}
-        </UButton>
-        <UButton
-          :to="localePath('/installation-guide/import-configuration')"
-          color="neutral"
-          variant="outline"
-          size="lg"
-          leading-icon="i-lucide-link"
-          trailing-icon="i-lucide-arrow-right"
-          class="justify-between"
-        >
-          {{ copy.importConfiguration }}
-        </UButton>
-        <UButton
-          :to="localePath('/installation-guide/troubleshooting')"
-          color="neutral"
-          variant="outline"
-          size="lg"
-          leading-icon="i-lucide-circle-alert"
-          trailing-icon="i-lucide-arrow-right"
-          class="justify-between"
-        >
-          {{ copy.troubleshooting }}
         </UButton>
       </div>
     </section>

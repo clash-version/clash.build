@@ -17,16 +17,26 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: 'en',
     strategy: 'prefix',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_redirected',
-      redirectOn: 'root',
-      fallbackLocale: 'en',
+    detectBrowserLanguage: false,
+    experimental: {
+      // Let the router resolve the root homepage alias before any locale redirect.
+      nitroContextDetection: false,
     },
     locales: [
       { code: 'en', language: 'en-US', name: 'English' },
       { code: 'zh-CN', language: 'zh-CN', name: '简体中文' },
     ],
+  },
+  hooks: {
+    'nitro:init'(nitro) {
+      nitro.hooks.hook('prerender:routes', (routes) => {
+        // The prefixed i18n strategy normally skips the root, which now serves the homepage.
+        nitro.options.prerender.ignore = nitro.options.prerender.ignore.filter(
+          pattern => !(pattern instanceof RegExp && pattern.source === /^\/$/.source),
+        )
+        routes.add('/')
+      })
+    },
   },
   icon: {
     clientBundle: {

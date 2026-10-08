@@ -8,11 +8,11 @@ const port = 43000 + (process.pid % 10000)
 const baseUrl = `http://${host}:${port}`
 
 async function waitForServer(processOutput) {
-  const deadline = Date.now() + 45_000
+  const deadline = Date.now() + 120_000
 
   while (Date.now() < deadline) {
     try {
-      const response = await fetch(baseUrl, { redirect: 'manual' })
+      const response = await fetch(baseUrl, { redirect: 'manual', signal: AbortSignal.timeout(5_000) })
       if (response.status < 500) return
     } catch {
       // The dev server is still starting.
@@ -24,7 +24,7 @@ async function waitForServer(processOutput) {
   throw new Error(`Nuxt dev server did not start.\n${processOutput.join('')}`)
 }
 
-test('the root route serves the browser language redirect entry point', { timeout: 60_000 }, async (t) => {
+test('the root route serves the homepage without language redirects', { timeout: 150_000 }, async (t) => {
   const processOutput = []
   const server = spawn(process.execPath, ['node_modules/nuxt/bin/nuxt.mjs', 'dev', '--host', host, '--port', String(port)], {
     cwd: process.cwd(),
@@ -45,19 +45,26 @@ test('the root route serves the browser language redirect entry point', { timeou
 
   await waitForServer(processOutput)
 
-  await t.test('serves the root redirect document without a fixed server redirect', async () => {
-    const response = await fetch(baseUrl, { redirect: 'manual' })
+  await t.test('renders the homepage even with a saved Chinese locale', async () => {
+    const response = await fetch(baseUrl, {
+      redirect: 'manual',
+      headers: { cookie: 'i18n_redirected=zh-CN', 'accept-language': 'zh-CN,zh;q=0.9' },
+    })
     const body = await response.text()
 
     assert.equal(response.status, 200)
     assert.match(response.headers.get('content-type') ?? '', /^text\/html/)
-    assert.match(body, /Redirecting to your preferred language/)
+    assert.equal(response.headers.get('location'), null)
+    assert.match(body, /Downloads made simple/)
+    assert.match(body, /Browse all client downloads/)
+    assert.doesNotMatch(body, /Redirecting to your preferred language|root-locale\.js|http-equiv="refresh"/)
   })
 
-  await t.test('serves the locale selector as JavaScript', async () => {
-    const response = await fetch(`${baseUrl}/root-locale.js`)
-
-    assert.equal(response.status, 200)
-    assert.match(response.headers.get('content-type') ?? '', /javascript/)
+  await t.test('keeps the English and Chinese homepages available', async () => {
+    for (const [locale, heading] of [['en', 'Downloads made simple'], ['zh-CN', '让下载变得简单']]) {
+      const response = await fetch(`${baseUrl}/${locale}`, { redirect: 'manual' })
+      assert.equal(response.status, 200)
+      assert.ok((await response.text()).includes(heading))
+    }
   })
 })

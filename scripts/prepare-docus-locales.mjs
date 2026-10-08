@@ -21,6 +21,10 @@ const patches = [
     replacements: [
       ['`docs_${locale.value}`', "`docs_${locale.value.replaceAll('-', '_')}`"],
       [
+        'if (!locales.some(locale => locale.code === currentLocale)) {',
+        "if (route.path !== '/' && !locales.some(locale => locale.code === currentLocale)) {",
+      ],
+      [
         "const nuxtUiLocale = computed(() => nuxtUiLocales[locale.value as keyof typeof nuxtUiLocales] || nuxtUiLocales.en)",
         "const nuxtUiLocale = computed(() => {\n  const localeKey = locale.value.toLowerCase().replaceAll('-', '_') as keyof typeof nuxtUiLocales\n  return nuxtUiLocales[localeKey] || nuxtUiLocales.en\n})",
       ],
@@ -66,7 +70,16 @@ const patches = [
     file: '../node_modules/docus/app/templates/landing.vue',
     replacements: [
       ['`landing_${locale.value}`', "`landing_${locale.value.replaceAll('-', '_')}`"],
-      ['.path(route.path).first()', '.path(route.path.toLowerCase()).first()'],
+      [
+        ['.path(route.path).first()', '.path(route.path.toLowerCase()).first()'],
+        ".path((route.path === '/' ? `/${locale.value}` : route.path).toLowerCase()).first()",
+      ],
+    ],
+  },
+  {
+    file: '../node_modules/docus/app/plugins/i18n.ts',
+    replacements: [
+      ["if (to.path === '/') {", "if (to.path === '/' && i18nConfig.detectBrowserLanguage) {"],
     ],
   },
   {
@@ -106,11 +119,13 @@ for (const patch of patches) {
 
   for (const [before, after] of patch.replacements) {
     if (source.includes(after)) continue
-    if (!source.includes(before)) {
+    const candidates = Array.isArray(before) ? before : [before]
+    const match = candidates.find(candidate => source.includes(candidate))
+    if (!match) {
       throw new Error(`Unable to apply Docus i18n compatibility patch to ${patch.file}`)
     }
 
-    source = source.replaceAll(before, after)
+    source = source.replaceAll(match, after)
     changed = true
   }
 
