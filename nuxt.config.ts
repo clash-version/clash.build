@@ -38,6 +38,19 @@ export default defineNuxtConfig({
       })
     },
   },
+  fonts: {
+    // The site uses the system font stack only, so @nuxt/fonts (pulled in via Docus -> Nuxt UI)
+    // has nothing to download. Disable its remote providers so dev/build never call
+    // fonts.google.com & co., which time out from mainland China.
+    providers: {
+      google: false,
+      googleicons: false,
+      bunny: false,
+      fontshare: false,
+      fontsource: false,
+      adobe: false,
+    },
+  },
   icon: {
     clientBundle: {
       icons: [
